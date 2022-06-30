@@ -1,19 +1,11 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-
-import com.mxgraph.analysis.*;
-import com.mxgraph.view.mxCellState;
-import com.mxgraph.view.mxGraph;
+import com.mxgraph.analysis.StructuralException;
+import com.mxgraph.analysis.mxAnalysisGraph;
+import com.mxgraph.analysis.mxGraphStructure;
+import com.mxgraph.analysis.mxTraversal;
 import com.mxgraph.view.mxGraph.mxICellVisitor;
-import com.mxgraph.view.mxGraphView;
-import com.mxgraph.model.*;
+import com.mxgraph.model.mxCell;
 
 
 public class AlgoritmosGrafos extends mxTraversal{

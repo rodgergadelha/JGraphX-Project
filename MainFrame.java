@@ -8,7 +8,9 @@ import java.awt.Component;
 
 import javax.swing.*;
 
-import java.util.*;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
@@ -38,11 +40,30 @@ public class MainFrame extends JFrame {
     }
 
     private void adicionarVertice() {
-        this.graph.getModel().beginUpdate();
+    	if(graph.getChildVertices(graph.getDefaultParent()).length == 25) {
+    		log("O número máximo de vértices foi atingido.");
+    		return;
+    	}
+    	
+        graph.getModel().beginUpdate();
         Object parent = this.graph.getDefaultParent();
-        Object v1 = this.graph.insertVertex(parent, null, "", 100, 100, 40, 40);
-        this.graph.getModel().endUpdate();
+        graph.insertVertex(parent, null, "", 100, 100, 40, 40);
+        graph.getModel().endUpdate();
     }
+    
+    
+    private void adicionarVertice(int x, int y) {
+    	if(graph.getChildVertices(graph.getDefaultParent()).length == 25) {
+    		log("O número máximo de vértices foi atingido.");
+    		return;
+    	}
+    	
+        graph.getModel().beginUpdate();
+        Object parent = this.graph.getDefaultParent();
+        graph.insertVertex(parent, null, "", x, y, 40, 40);
+        graph.getModel().endUpdate();
+    }
+    
 
     private void deletarCelula() {
         this.graph.getModel().beginUpdate();
@@ -81,6 +102,7 @@ public class MainFrame extends JFrame {
         animation_timer.schedule(animation_task, 0, 500);
 
     }
+    
  
     private void log(String mensagem) {
         JOptionPane.showMessageDialog(null, mensagem);
@@ -246,14 +268,16 @@ public class MainFrame extends JFrame {
                 
                 if(cell != null && ((mxCell)cell).isEdge()) {
                     String pesoStr =  JOptionPane.showInputDialog("Digite o peso dessa aresta:");
-                    double peso = 1.0;
+                    boolean valido = false;
+                    
                     try {
-                        peso = Double.parseDouble(pesoStr);
+                        Double.parseDouble(pesoStr);
+                        valido = true;
                     }catch(NumberFormatException n) {
-                        JOptionPane.showInputDialog("Peso inválido.");
+                        if(!pesoStr.equals("")) log("Peso inválido.");
                     }
                     
-                    if(!pesoStr.equals("1")) ((mxCell)cell).setValue(pesoStr);
+                    if(valido) ((mxCell)cell).setValue(pesoStr);
                     else ((mxCell)cell).setValue("");
 
                     graphComponent.refresh();
@@ -281,6 +305,13 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 deletarTodasCelulas();
             }
+        });
+        
+        
+        graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
+        	public void mouseReleased(MouseEvent e) {
+        		if(SwingUtilities.isRightMouseButton(e)) adicionarVertice(e.getX(), e.getY());
+        	}
         });
 
 
