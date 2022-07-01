@@ -16,14 +16,9 @@ import com.mxgraph.view.mxGraph;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.analysis.StructuralException;
-import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxParallelEdgeLayout;
-import com.mxgraph.view.mxEdgeStyle;
-import com.mxgraph.view.mxEdgeStyle.mxEdgeStyleFunction;
 
 import controller.funcoesBotoes;
-
-
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,10 +28,10 @@ public class MainFrame extends JFrame {
 	private mxGraph graph;
     private mxGraphComponent graphComponent;
     private mxParallelEdgeLayout layout;
-    private JButton botaoDel, botaoDfs, botaoDij, botaoPeso, botaoLimpar, botaoRemoveAll;
+    private JButton botaoDel, botaoDfs, botaoDij, botaoPeso, botaoLimpar, botaoRemoveAll, botaoBfs;
     private Map<String, Object> style;
     private JPanel grafoContainer, botoesContainer;
-    private Object cell;
+    private boolean direcionado;
 
     public MainFrame() {
         initGUI();
@@ -44,6 +39,12 @@ public class MainFrame extends JFrame {
     
 
     private void initAnimation(List<Object> cellsToPaint) {
+        
+        if(cellsToPaint.size() == 0) {
+            JOptionPane.showMessageDialog(null, "Não é possível alcançar o vértice alvo.");
+            return;
+        }
+        
         enableButtons(false);
         botaoLimpar.setEnabled(false);
 
@@ -82,6 +83,17 @@ public class MainFrame extends JFrame {
     private void log(String mensagem) {
 		 JOptionPane.showMessageDialog(null, mensagem);
 	}
+
+    private void showDirecionadoOptions() {
+        int option = JOptionPane.showConfirmDialog(null, "Você deseja criar um grafo direcionado?", null, JOptionPane.YES_NO_OPTION);
+        direcionado = option == 0;
+        style = graph.getStylesheet().getDefaultEdgeStyle();
+
+        if(direcionado) style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
+        else style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_WIDTH);
+
+        graphComponent.refresh();
+    }
     
     
 
@@ -96,10 +108,8 @@ public class MainFrame extends JFrame {
         graph.setCellsCloneable(false);
         
         layout = new mxParallelEdgeLayout(graph);
-       
         
         style = graph.getStylesheet().getDefaultEdgeStyle();
-        style.put(mxConstants.STYLE_ENDARROW, true);
         style.put(mxConstants.STYLE_FONTSIZE, 20);
         style.put(mxConstants.STYLE_FONTCOLOR, "black");
 
@@ -138,7 +148,7 @@ public class MainFrame extends JFrame {
 	                }
 	            }
             	
-                List<Object> cellsToPaint = funcoesBotoes.getVisitedVertexesDfs(graph);
+                List<Object> cellsToPaint = funcoesBotoes.getVisitedVertexesDfs(graph, direcionado);
                 
                 if(cellsToPaint == null) return;
                 
@@ -146,6 +156,29 @@ public class MainFrame extends JFrame {
                 
             }
         });
+
+
+        botaoBfs = new JButton("bfs");
+        botoesContainer.add(botaoBfs);
+        botaoBfs.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	
+	        	for(Object edge : graph.getAllEdges(graph.getChildCells(graph.getDefaultParent()))) {
+	                if(!((mxCell)edge).getValue().equals("")) {
+	                	log("O bfs não funciona em grafos ponderados.");
+	                	return;
+	                }
+	            }
+            	
+                List<Object> cellsToPaint = funcoesBotoes.getVisitedVertexesBfs(graph, direcionado);
+                
+                if(cellsToPaint == null) return;
+                
+                initAnimation(cellsToPaint);
+                
+            }
+        });
+
 
 
         botaoDij = new JButton("dijkistra");
@@ -171,7 +204,7 @@ public class MainFrame extends JFrame {
         		List<Object> cellsToPaint = null;
         		
         		try {
-        			cellsToPaint = funcoesBotoes.getVisitedVertexesDjikstra(graph);
+        			cellsToPaint = funcoesBotoes.getVisitedVertexesDjikstra(graph, direcionado);
         		}catch(StructuralException s) {
         			log("O algoritmo de Dijkstra não funciona em grafos desconexos.");
         		}
@@ -232,6 +265,7 @@ public class MainFrame extends JFrame {
         botaoRemoveAll.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 funcoesBotoes.deletarTodasCelulas(graph);
+                showDirecionadoOptions();
             }
         });
         
@@ -246,23 +280,23 @@ public class MainFrame extends JFrame {
             		return;
             	}
         		
-        		if(SwingUtilities.isRightMouseButton(e)) funcoesBotoes.adicionarVertice(graph, e.getX(), e.getY());
+        		if(SwingUtilities.isRightMouseButton(e)) funcoesBotoes.adicionarVertice(graph, e.getX()-20, e.getY()-20);
         		
         	}
         });
-
 
         
         setLayout(new FlowLayout(FlowLayout.CENTER));
         getContentPane().add(grafoContainer);
         getContentPane().add(botoesContainer);
 
-
         setTitle("Graph Visualizer");
         setSize(800, 550);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+
+        showDirecionadoOptions();
         
     }
 }
