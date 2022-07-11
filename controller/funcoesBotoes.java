@@ -54,14 +54,13 @@ public class funcoesBotoes {
             	
 		if(cell != null && ((mxCell)cell).isEdge()) {
 			String pesoStr =  JOptionPane.showInputDialog("Digite o peso dessa aresta:");
-
 			if(pesoStr == null) return;
 
 			boolean valido = false;
 			
 			try {
-				Double.parseDouble(pesoStr);
-				valido = true;
+				double peso = Double.parseDouble(pesoStr);
+				if(peso != 1) valido = true;
 			}catch(NumberFormatException n) {
 				if(!pesoStr.equals("")) log("Peso inválido.");
 			}
@@ -235,10 +234,10 @@ public class funcoesBotoes {
             String xml = mxUtils.getPrettyXml(codec.encode(graph.getModel()));
             mxUtils.writeFile(xml, path);
 
-            log("The Object  was succesfully written to a file");
+            log("Grafo salvo com sucesso.");
  
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log("Ocorreu um erro ao tentar salvar o grafo.");
         }
     }
 
