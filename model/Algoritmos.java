@@ -16,7 +16,7 @@ import com.mxgraph.model.mxCell;
 
 public class Algoritmos extends mxTraversal{
 
-    static int temp = 0;
+    static int temp;
 
 
     // Sobrescrita do método dfs
