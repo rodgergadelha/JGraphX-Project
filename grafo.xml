@@ -1,0 +1,72 @@
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="172" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="302.0" y="68.0"/>
+    </mxCell>
+    <mxCell id="173" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="232.0" y="249.0"/>
+    </mxCell>
+    <mxCell id="174" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="398.0" y="220.0"/>
+    </mxCell>
+    <mxCell id="175" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="111.0" y="393.0"/>
+    </mxCell>
+    <mxCell id="177" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="17.0" y="186.0"/>
+    </mxCell>
+    <mxCell id="179" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="175.0" y="330.0"/>
+    </mxCell>
+    <mxCell id="180" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="286.0" y="378.0"/>
+    </mxCell>
+    <mxCell id="181" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="24.0" y="116.0"/>
+    </mxCell>
+    <mxCell id="182" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="345.0" y="181.0"/>
+    </mxCell>
+    <mxCell id="186" parent="1" style="defaultVertex;fillColor=white;shape=ellipse" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="40.0" x="244.0" y="322.0"/>
+    </mxCell>
+    <mxCell edge="1" id="188" parent="1" source="172" style="strokeColor=#6482B9" target="182" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="189" parent="1" source="173" style="strokeColor=#6482B9" target="179" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="190" parent="1" source="173" style="strokeColor=#6482B9" target="181" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="191" parent="1" source="175" style="strokeColor=#6482B9" target="180" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="194" parent="1" source="177" style="strokeColor=#6482B9" target="173" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="195" parent="1" source="177" style="strokeColor=#6482B9" target="175" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="196" parent="1" source="179" style="strokeColor=#6482B9" target="181" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="197" parent="1" source="180" style="strokeColor=#6482B9" target="186" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="198" parent="1" source="181" style="strokeColor=#6482B9" target="181" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="199" parent="1" source="186" style="strokeColor=#6482B9" target="174" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell edge="1" id="200" parent="1" source="182" style="strokeColor=#6482B9" target="174" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="370.0" y="200.0"/>
+        <mxPoint as="targetPoint" x="410.0" y="230.0"/>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>
