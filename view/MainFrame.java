@@ -61,7 +61,7 @@ public class MainFrame extends JFrame {
         graph.setCellsMovable(isEnabled);
     }
 
-    private void showDirecionadoOptions() {
+    private void opcoesDirecionado() {
         int option = JOptionPane.showConfirmDialog(null, "Você deseja criar um grafo direcionado?", null, JOptionPane.YES_NO_OPTION);
         direcionado = option == 0;
         style = graph.getStylesheet().getDefaultEdgeStyle();
@@ -128,14 +128,14 @@ public class MainFrame extends JFrame {
         style.put(mxConstants.STYLE_SHAPE, "ellipse");
         style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD);
         style.put(mxConstants.STYLE_FONTCOLOR, "black");
+
+        gbc = new GridBagConstraints();
         
         grafoContainer = new JPanel();
         grafoContainer.setLayout(new FlowLayout());
 
         botoesContainer = new JPanel();
         botoesContainer.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        //botoesContainer.setPreferredSize(new Dimension(300, 450));
 
         tagAlgoritmo = new JLabel("Algoritmos");
         botoesAlgoritmos = new JPanel();
@@ -145,7 +145,7 @@ public class MainFrame extends JFrame {
         botoesEdicao = new JPanel();
         botoesEdicao.setLayout(new GridLayout(3,2, 10, 10));
 
-        tagVelocidade = new JLabel("Velocidade");
+        tagVelocidade = new JLabel("Velocidade dos algoritmos");
         botoesVelocidade = new JPanel();
         botoesVelocidade.setLayout(new GridBagLayout());
 
@@ -233,7 +233,7 @@ public class MainFrame extends JFrame {
         botaoRemoveAll.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 funcoesBotoes.deletarTodasCelulas(graph);
-                showDirecionadoOptions();
+                opcoesDirecionado();
             }
         });
 
@@ -370,7 +370,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
-        showDirecionadoOptions();
+        opcoesDirecionado();
         
     }
 }

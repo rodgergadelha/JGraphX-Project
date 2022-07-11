@@ -28,9 +28,9 @@ public class Algoritmos extends mxTraversal{
     // Sobrescrita do método dfsRec
     private static void dfsRec(boolean direcionado, final mxAnalysisGraph aGraph, final Object cell, final Object edge, final Set<Object> seen, final List<Object> vertexesStates) {
         if (cell != null && !seen.contains(cell)) {
-            Object[] curState = {cell, "blue"};
             temp = temp + 1;
             int tempI = temp;
+            Object[] curState = {cell, "blue", "I: "+tempI};
             vertexesStates.add(curState);
 
             seen.add(cell);
@@ -39,6 +39,7 @@ public class Algoritmos extends mxTraversal{
             for (int i = 0; i < opposites.length; ++i) {
                 dfsRec(direcionado, aGraph, opposites[i], edges[i], seen, vertexesStates);
             }
+            
             temp = temp + 1;
             int tempF = temp;
             Object[] curState2 = {cell, "orange", "I: "+tempI+"\nF: "+tempF};
@@ -218,7 +219,7 @@ public class Algoritmos extends mxTraversal{
 
 
             // Mudando a cor do vértice para vermelho, indicando que o mesmo está fora da lista
-            Object[] curState4 = {closestVertex, "orange", minDistance+"\nFORA"};
+            Object[] curState4 = {closestVertex, "#f71f1b", minDistance+"\nFORA"};
             if(minDistance == Integer.MAX_VALUE) curState4[2] = "∞\nFORA";
             vertexesStates.add(curState4);
 
