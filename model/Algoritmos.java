@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.List;
+import java.util.Arrays;
 
 import com.mxgraph.analysis.StructuralException;
 import com.mxgraph.analysis.mxAnalysisGraph;
@@ -18,7 +19,7 @@ public class Algoritmos extends mxTraversal{
     static int temp = 0;
 
 
-// Sobrescrita do método dfs
+    // Sobrescrita do método dfs
     public static void dfs(boolean direcionado, final mxAnalysisGraph aGraph, final Object startVertex, final List<Object> vertexesStates) {
         temp = 0;
         dfsRec(direcionado, aGraph, startVertex, null, new HashSet<Object>(), vertexesStates);
@@ -50,23 +51,38 @@ public class Algoritmos extends mxTraversal{
 	//Sobrescrita do método bfs
 	public static void bfs(boolean direcionado, final mxAnalysisGraph aGraph, final Object startVertex, final List<Object> vertexesStates) {
         if (aGraph != null && startVertex != null && vertexesStates != null) {
+            
+            // Mudando o valor das celulas que sejam vertices para "∞"
+            final List<Object> vertexes = Arrays.asList(aGraph.getChildVertices(aGraph.getGraph().getDefaultParent()));
+            final int[] distances = new int[vertexes.size()];
+            
+            for(int i = 0; i < vertexes.size(); i++) {
+                Object v = vertexes.get(i);
+                ((mxCell)v).setValue("∞");
+                distances[i] = Integer.MAX_VALUE;
+            }
+            aGraph.getGraph().refresh();
+
             final Set<Object> queued = new HashSet<Object>();
             final LinkedList<Object[]> queue = new LinkedList<Object[]>();
             final Object[] q = { startVertex, null };
             queue.addLast(q);
             queued.add(startVertex);
-            bfsRec(direcionado, aGraph, queued, queue, vertexesStates);
+            
+            distances[vertexes.indexOf(startVertex)] = 0;
+            bfsRec(direcionado, aGraph, queued, queue, vertexesStates, vertexes, distances);
         }
     }
     
 
 	// Sobrescrita do método bfsRec
-    private static void bfsRec(boolean direcionado, final mxAnalysisGraph aGraph, final Set<Object> queued, final LinkedList<Object[]> queue, final List<Object> vertexesStates) {
+    private static void bfsRec(boolean direcionado, final mxAnalysisGraph aGraph, final Set<Object> queued, final LinkedList<Object[]> queue, final List<Object> vertexesStates, final List<Object> vertexes, final int[] distances) {
         if (queue.size() > 0) {
             final Object[] q = queue.removeFirst();
             final Object cell = q[0];
-            
-            Object[] curState = {cell, "orange"};
+
+            int curDistance = distances[vertexes.indexOf(cell)];
+            Object[] curState = {cell, "orange", "d: "+curDistance};
             vertexesStates.add(curState);
 
             final Object[] edges = aGraph.getEdges(cell, (Object)null, !direcionado, true, true, false);
@@ -79,11 +95,12 @@ public class Algoritmos extends mxTraversal{
                     queue.addLast(current);
                     queued.add(opposite);
 
-                    Object[] curState2 = {opposite, "blue"};
+                    distances[vertexes.indexOf(opposite)] = curDistance + 1;
+                    Object[] curState2 = {opposite, "blue", "d: "+(curDistance + 1)};
                     vertexesStates.add(curState2);
                 }
             }
-            bfsRec(direcionado, aGraph, queued, queue, vertexesStates);
+            bfsRec(direcionado, aGraph, queued, queue, vertexesStates, vertexes, distances);
         }
     }
 

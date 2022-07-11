@@ -140,13 +140,6 @@ public class funcoesBotoes {
 	
 	
 	public static List<Object> getVisitedVertexesDfs(mxGraph graph, boolean direcionado) {
-		for(Object edge : graph.getAllEdges(graph.getChildCells(graph.getDefaultParent()))) {
-			if(!((mxCell)edge).getValue().equals("")) {
-				log("O dfs não funciona em grafos ponderados.");
-				return null;
-			}
-		}
-
 		if(graph.getSelectionCells().length != 1) return null;
 		
 		for(Object c : graph.getSelectionCells()) {
