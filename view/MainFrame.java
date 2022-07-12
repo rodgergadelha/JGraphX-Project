@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
      * 
      * @param isEnabled
      */
-    private void enableButtons(boolean isEnabled) {
+    public void enableButtons(boolean isEnabled) {
         for (Component c : botoesVelocidade.getComponents()) {
             c.setEnabled(isEnabled);
         }
@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
      * O estilo das arestas muda de acordo com a escolha.
      * 
      */
-    private void opcoesDirecionado() {
+    public void opcoesDirecionado() {
         Object[] options = {"Sim", "Não"};
         
         int option = JOptionPane.showOptionDialog(null, "Você deseja criar um grafo direcionado?", null,
@@ -99,7 +99,7 @@ public class MainFrame extends JFrame {
      * 
      * @param vertexesStates
      */
-    private void initAnimation(List<Object> vertexesStates) {
+    public void initAnimation(List<Object> vertexesStates) {
         enableButtons(false);
         botaoNormal.setEnabled(true);
         botaoInst.setEnabled(true);
@@ -143,7 +143,7 @@ public class MainFrame extends JFrame {
      * Método que inicializa a interface gráfica, como os containers, buttons
      * e layout. Aplica os eventos quando estes são ativados.
      */
-    private void initGUI() {
+    public void initGUI() {
 
         //Inicializa o grafo
         graph = new mxGraph();
