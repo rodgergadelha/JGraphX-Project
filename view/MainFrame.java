@@ -76,7 +76,6 @@ public class MainFrame extends JFrame {
      * Mostra uma caixa de diálogo ao usuário perguntando se o mesmo deseja criar um grafo direcionado.
      * O estilo das arestas muda de acordo com a escolha.
      * 
-     * @param vertexesStates
      */
     private void opcoesDirecionado() {
         Object[] options = {"Sim", "Não"};
