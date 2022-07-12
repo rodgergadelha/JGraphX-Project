@@ -115,7 +115,8 @@ public class funcoesBotoes {
 
 	/**
 	 * Método que gera um grafo aleatório. Adiciona os vértices com coordenadas
-	 * aleatórias e determina uma probabilidade p de uma aresta ser adicionada entre dois vértices quaisquer do grafo.
+	 * aleatórias e determina uma probabilidade p de uma aresta ser adicionada entre dois vértices quaisquer do grafo. 
+	 * O grafo tem 50% de chance de ser ponderado.
 	 * 
 	 * @param graphComponent
 	 * @param layout
@@ -123,10 +124,10 @@ public class funcoesBotoes {
 	public static void gerarGrafoAleatorio(mxGraphComponent graphComponent, mxParallelEdgeLayout layout) {
 		Random gerador = new Random();
 		int ponderado = gerador.nextInt(2);
-		double q;
-		double p = 0.05;
+		double q;        // Vai indicar se a aresta vai ser escolhida ou não
+		double p = 0.05; // Chance de 5% de uma aresta ser adicionada
 		int numeroVertices, pesoAresta;
-		numeroVertices = gerador.nextInt(21) + 5;
+		numeroVertices = gerador.nextInt(21) + 5; // 5 <= n <= 25
 
 		deletarTodasCelulas(graphComponent.getGraph());
 		List<List<Integer>> listaCoordenadas = new ArrayList<List<Integer>>();
@@ -139,9 +140,11 @@ public class funcoesBotoes {
 			boolean continuarLoop;
 
 			do {
+				// X e Y aleatórios
 				x = gerador.nextInt(506);
 				y = gerador.nextInt(475);
 				continuarLoop = false;
+				// Verificar se as coordenadas escolhidas não estão muito próximas de outro vértice
 				for (int j = 0; j < listaCoordenadas.size(); j++) {
 					xi = listaCoordenadas.get(j).get(0);
 					yi = listaCoordenadas.get(j).get(1);
@@ -149,6 +152,7 @@ public class funcoesBotoes {
 						continuarLoop = true;
 					}
 				}
+				// Caso a distância do novo vértice e de outro vértice seja menor ou igual a 40, tentar outra coordenada
 				if (continuarLoop) {
 					cell = new Object();
 					continue;
@@ -167,14 +171,17 @@ public class funcoesBotoes {
 		pesoAresta = 1;
 		for (Object vertex1 : vertexes) {
 			for (Object vertex2 : vertexes) {
-				q = Math.random();
+				q = Math.random(); // Valor que vai determinar se a aresta vai ser escolhida
 				Object parent = graphComponent.getGraph().getDefaultParent();
+				// Se o grafo for ponderado, o peso vai ser escolhido aleatoriamente de 1 a 100
 				if (ponderado == 1) {
 					pesoAresta = gerador.nextInt(100) + 1;
+					// if que determina se a aresta vai ser escolhida
 					if (q <= p)
 						graphComponent.getGraph().insertEdge(parent, null, "" + pesoAresta, vertex1, vertex2);
 					layout.execute(graphComponent.getGraph().getDefaultParent());
 				} else {
+					// if que determina se a aresta vai ser escolhida
 					if (q <= p)
 						graphComponent.getGraph().insertEdge(parent, null, "", vertex1, vertex2);
 					layout.execute(graphComponent.getGraph().getDefaultParent());
@@ -183,6 +190,7 @@ public class funcoesBotoes {
 		}
 
 	}
+	
 
 
 	/**
