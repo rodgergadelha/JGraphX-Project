@@ -49,7 +49,7 @@ public class funcoesBotoes {
 	public static void adicionarVertice(mxGraph graph, int x, int y) {
 		graph.getModel().beginUpdate();
 		Object parent = graph.getDefaultParent();
-		graph.insertVertex(parent, null, "", x, y, 35, 35);
+		graph.insertVertex(parent, null, "", x, y, 38, 38);
 		graph.getModel().endUpdate();
 	}
 
