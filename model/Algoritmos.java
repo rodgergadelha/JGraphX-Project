@@ -270,8 +270,8 @@ public class Algoritmos {
                 }
             }
 
-            // Mudando a cor do vértice para vermelho, indicando que o mesmo está fora de vertexList
-            Object[] curState4 = { closestVertex, "#f71f1b", minDistance + "\nFORA" };
+            // Mudando a cor do vértice para verde, indicando que o mesmo está fora de vertexList
+            Object[] curState4 = { closestVertex, "#1bd19b", minDistance + "\nFORA" };
             if (minDistance == Integer.MAX_VALUE)
                 curState4[2] = "∞\nFORA";
             vertexesStates.add(curState4);
