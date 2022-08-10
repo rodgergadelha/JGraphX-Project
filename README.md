@@ -1,5 +1,5 @@
-h1 align="center">
-<br>JGraphX-Project
+<h1 align="center">
+📄<br>JGraphX-Project
 </h1>
 
 Aplicação Java que permite ao usuário criar grafos e visualizar os passos dos algoritmos de busca.
