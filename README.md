@@ -4,7 +4,7 @@
 
 
 <p align="center">Aplicação Java que permite ao usuário criar grafos e visualizar os passos dos algoritmos de busca.</p>
-<p align="center">O projeto foi desenvolvido com o auxílio da biblioteca <a href="https://jgraph.github.io/mxgraph/java/docs/index.html">JGraphX</a></p>
+<p align="center">O projeto foi desenvolvido com o auxílio da biblioteca <a href="https://github.com/jgraph/jgraphx">JGraphX</a></p>
 
 # Funcionalidades da aplicação
 
