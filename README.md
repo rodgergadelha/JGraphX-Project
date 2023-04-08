@@ -1,5 +1,5 @@
 <h1 align="center">
- <br>JGraphX-Project
+ <br>JGraphX
 </h1>
 
 
